@@ -1,2 +1,2 @@
-# semester-project-binomial-heap
+# Binomial Heap
 Semester Project in ITIS 
