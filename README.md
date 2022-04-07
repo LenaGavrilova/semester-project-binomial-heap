@@ -19,10 +19,10 @@
  * Delete – удаление объекта.
 
 Асимптотика перечисленных выше операций такова:
-Make – O(1)
-Merge – O(N)
-Insert – O(log N) – где N – количество элементов в куче.
-Minimum – O(1)
-ExtractMin – O(log N)
-Decrease – O(log N)
-Delete – O(log N)
+ * Make – O(1)
+ * Merge – O(N)
+ * Insert – O(log N) – где N – количество элементов в куче.
+ * Minimum – O(1)
+ * ExtractMin – O(log N)
+ * Decrease – O(log N)
+ * Delete – O(log N)
