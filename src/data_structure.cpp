@@ -15,7 +15,7 @@ namespace itis {
         return false;
     }
 
-    int BinomialHeap::Minimum() const{
+    int BinomialHeap::Minimum() const {
         int minKey = root_list.front()->key;
         Node* node{root_list.front()->sibling};
         while (node != nullptr) {

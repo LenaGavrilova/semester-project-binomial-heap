@@ -10,17 +10,25 @@ namespace itis {
   // Пример: объявление константы времени компиляции в заголовочном файле
   inline constexpr auto kStringConstant = "Hello, stranger!";
 
-  struct Node final {
-      int key{0};
-      int value{0};
-      int degree{0};
-      Node* parent{nullptr};
-      Node* child{nullptr};
-      Node* sibling{nullptr};
+    struct Node final {
+        int key{0};
+        int value{0};
+        int degree{0};
+        Node* parent{nullptr};
+        Node* child{nullptr};
+        Node* sibling{nullptr};
 
-      Node() = default;
-      Node(int key, int value) : key{key}, value{value} {}
+        Node() = default;
+        Node(int key, int value) : key{key}, value{value} {}
   };
+
+    void binomialTreeLink(Node *node1, Node *node2) {
+        // node1 - child, node2 - parent
+        node1->parent = node2;
+        node1->sibling = node2->child;
+        node2->child = node1;
+        node2->degree++;
+    }
 
   struct BinomialHeap {
   protected:
