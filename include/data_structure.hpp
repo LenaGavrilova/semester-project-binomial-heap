@@ -3,119 +3,52 @@
 // Заголовочный файл с объявлением структуры данных
 
 #include <optional>
+#include <vector>
 
 namespace itis {
 
   // Пример: объявление константы времени компиляции в заголовочном файле
   inline constexpr auto kStringConstant = "Hello, stranger!";
 
-  // Пример: объявление структуры с полями и методами
   struct Node final {
       int key{0};
       int value{0};
+      int degree{0};
+      Node* parent{nullptr};
+      Node* child{nullptr};
+      Node* sibling{nullptr};
 
       Node() = default;
-      Node(int key, int value) : key{key}, value{value} {}
+      Node(int key, int value, int degree, Node* parent, Node* child, Node* sibling) :
+      key{key}, value{value}, degree{degree}, parent{parent}, child{child}, sibling{sibling} {}
   };
 
   struct BinomialHeap {
   protected:
-      // поля структуры
       int size_{0};
       int capacity_{0};
-      Node* data_{nullptr};
+      Node* root{nullptr};
 
   public:
-      static constexpr int kDefaultCapacity = 1 + 2 + 4 + 8 + 16;
 
       /**
-       * Создание биномиальной кучи указанной емкости.
+       * создание биномиальной кучи размера n
        *
-       * Емкость кучи ограничена и не может быть изменена (а я хочу чтобы хз).
-       *
-       * @param capacity - значение емкости двоичной кучи
+       * @param n
        */
-      explicit BinomialHeap(int capacity = kDefaultCapacity);
+      explicit BinomialHeap(int n);
 
-      /**
-       * высвобождение выделенной памяти.
-       *
-       * Поля устанавливаются в нулевые значения.
-       */
       ~BinomialHeap();
 
-      /**
-       * Вставка узла в биномиальной кучу.
-       *
-       * Разрешена вставка существующих ключей.
-       *
-       * @param key - значение ключа
-       * @param value - хранимые данные
-       * @return true - успешная вставка, false - при превышении значения емкости
-       */
       bool Insert(int key, int value);
 
       /**
-       * Извлечение корневого узла из биномиальной кучи.
-       *
-       * Происходит удаление корня и перестройка кучи с установкой нового корневого узла.
-       *
-       * @return хранимые данные корневого узла или ничего (при пустой куче)
-       */
-      std::optional<int> Extract();
+      * поиск минимального ключа кучи
+      * @return минимальный ключ
+      */
+      int Minimum() const;
 
-      /**
-       * Удаление узла из биномиальной кучи по ключу.
-       *
-       * @param key - значение ключа удаляемого узла
-       * @return true - успешное удаление, false - узел с ключом не найден
-       */
-      bool Remove(int key);
-
-      /**
-       * Очистка биномиальной кучи.
-       *
-       * Сброс текущего размера кучи до нулевого значения.
-       * Выделенная память не высвобождается.
-       */
-      void Clear();
-
-      /**
-       * Поиск узла по ключу в биномиальной куче.
-       *
-       * @param key - значение ключа
-       * @return хранимые данные или ничего (если узел с ключом не найден)
-       */
-      std::optional<int> Search(int key) const;
-
-      /**
-       * Проверка наличия узла в биномиальной куче по ключу.
-       *
-       * @param key - значение ключа
-       * @return true - узел найден, false - узла с ключом не существует
-       */
-      bool Contains(int key) const;
-
-      /**
-       * Проверка пустоты биномиальной кучи.
-       *
-       * @return true - куча пустая, false - куча не пустая
-       */
-      bool IsEmpty() const;
-
-      /**
-       * Возвращает установленную емкость биномиальной кучи.
-       *
-       * @return значение емкости
-       */
-      int capacity() const;
-
-      /**
-       * Возвращает текущий размер биномиальной кучи.
-       *
-       * @return значение кол-ва узлов в куче
-       */
-      int size() const;
+      std::optional<int> ExtractMin();
 
       /**
        * Слияние двух куч (пока хз как работает просто объявляю)
@@ -125,32 +58,18 @@ namespace itis {
        */
       bool merge(BinomialHeap heap1, BinomialHeap heap2);
 
-  private:
       /**
-       * Поднятие узла с указанным индексом по биномиальной куче.
-       *
-       * Является операцией поддерживающей балансировку двоичной кучи.
-       *
-       * @param index - значение индекса поднимаемого узла
+       * пока не понял че за метод такой интересный
        */
-      void sift_up(int index);
+      void Decrease();
 
-      /**
-       * Спуск узла с указанным индексом по двоичной куче.
-       *
-       * Является операцией поддерживающей балансировку биномиальной кучи.
-       *
-       * @param index - значение индекса спускаемого узла
-       */
-      void heapify(int index);
+      void Delete();
 
-      /**
-       * Поиск индекса узла по ключу.
-       *
-       * @param key - значение ключа узла
-       * @return индекс найденного узла или ничего (при его отсутствии)
-       */
-      std::optional<int> search_index(int key) const;
+      // геттеры
+
+      int capacity() const;
+
+      int size() const;
   };
 
 }  // namespace itis
