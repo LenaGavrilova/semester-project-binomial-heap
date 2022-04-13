@@ -93,10 +93,7 @@ namespace itis {
         node->parent = nullptr;
         node->child = nullptr;
         node->sibling = nullptr;
-        BinomialHeapUnion(root_, node);
-        if (size_ == 0) {
-            root_ = node;
-        }
+        root_ = BinomialHeapUnion(root_, node);
         size_++;
         return true;
     }
@@ -129,11 +126,6 @@ namespace itis {
 
     int BinomialHeap::size() const {
         return size_;
-    }
-
-    void BinomialHeap::print() {
-        std::cout << root_;
-        std::cout << root_->child;
     }
 
 }  // namespace itis

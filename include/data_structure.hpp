@@ -29,13 +29,24 @@ namespace itis {
        */
       explicit BinomialHeap() = default;
 
+      /**
+       * удаление и высвобождение памяти
+       */
       ~BinomialHeap();
 
+      /**
+       * вставка нового узла в биномиальную кучу
+       * работает по типу создается новый узел с данными ключами и значениями
+       * и объединяется с уже существующей кучей
+       * @param key
+       * @param value
+       * @return
+       */
       bool Insert(int key, int value);
 
       /**
       * поиск минимального ключа кучи
-      * @return минимальный ключ
+      * @return минимальный ключ кучи (удивительно)
       */
       int Minimum() const;
 
@@ -51,8 +62,6 @@ namespace itis {
       // геттеры
 
       int size() const;
-
-      void print();
   };
 
 }  // namespace itis
