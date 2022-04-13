@@ -86,7 +86,19 @@ namespace itis {
     BinomialHeap::~BinomialHeap() = default;
 
     bool BinomialHeap::Insert(int key, int value) {
-        return false;
+        Node* node = new Node();
+        node->key = key;
+        node->value = value;
+        node->degree = 0;
+        node->parent = nullptr;
+        node->child = nullptr;
+        node->sibling = nullptr;
+        BinomialHeapUnion(root_, node);
+        if (size_ == 0) {
+            root_ = node;
+        }
+        size_++;
+        return true;
     }
 
     int BinomialHeap::Minimum() const {
