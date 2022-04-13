@@ -88,7 +88,8 @@ cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo && cmake --config RelWithDebInfo --bu
 2. В директории dataset найдите файл generate_csv_dataset.py и запустите его, например, с помощью правой кнопки мыши (проверьте, чтобы у вас был настроен интерпетатор python). После этого в директории `dataset` начнётся генерация тестовых данных.
 Данные будут организованы следующим образом:
 
-``` dataset/
+``` 
+dataset/
   insert/
     01/
       100.csv
