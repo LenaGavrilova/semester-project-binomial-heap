@@ -78,7 +78,8 @@ cd C:\Users\username\asd-projects\semester-project-binomial-heap
 mkdir -p build && cd build 
 
 # сборка проекта
-cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo && cmake --config RelWithDebInfo --build .```
+cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo && cmake --config RelWithDebInfo --build . 
+```
 
 ##### Генерация готовых тестов 
 
