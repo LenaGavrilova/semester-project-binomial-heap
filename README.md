@@ -9,6 +9,8 @@
 
 Данная структура данных используется для реализации [priority queue.](https://en.wikipedia.org/wiki/Priority_queue#:~:text=In%20computer%20science%2C%20a%20priority,an%20element%20with%20low%20priority.)
 
+Все данные о проекте: [туть](https://drive.google.com/drive/folders/1XcATtVu8xDHlHDdta9sT6h_-edvn4emC?usp=sharing)
+
 Для этой структуры должны быть возможны операции:
  * Make – создание новой пустой кучи,
  * Insert – вставка нового элемента в кучу,
