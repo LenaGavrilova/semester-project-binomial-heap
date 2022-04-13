@@ -9,10 +9,6 @@ namespace itis {
 
   // здесь должны быть определения методов вашей структуры
 
-    BinomialHeap::BinomialHeap(int capacity) {
-        throw std::runtime_error("unsupported operation");
-    }
-
     BinomialHeap::~BinomialHeap() = default;
 
     bool BinomialHeap::Insert(int key, int value) {
@@ -20,8 +16,8 @@ namespace itis {
     }
 
     int BinomialHeap::Minimum() const{
-        int minKey = root->key;
-        Node* node{root->sibling};
+        int minKey = root_list.front()->key;
+        Node* node{root_list.front()->sibling};
         while (node != nullptr) {
             if (node->key < minKey) {
                 minKey = node->key;
@@ -35,8 +31,35 @@ namespace itis {
         return std::nullopt;
     }
 
-    bool BinomialHeap::merge(BinomialHeap heap1, BinomialHeap heap2) {
-        return false;
+    BinomialHeap* BinomialHeap::Merge(BinomialHeap heap1, BinomialHeap heap2) {
+        std::list<Node*> h;
+        Node* h1 = heap1.root_list.front();
+        Node* h2 = heap2.root_list.front();
+        while (h1 != nullptr && h2 != nullptr) {
+            if (h1->degree <= h2->degree) {
+                h.back()->sibling = h1;
+                h.push_back(h1);
+                h1 = h1->sibling;
+            } else {
+                h.back()->sibling = h2;
+                h.push_back(h2);
+                h2 = h2->sibling;
+            }
+        }
+        while (h1 != nullptr) {
+            h.back()->sibling = h1;
+            h.push_back(h1);
+            h1 = h1->sibling;
+        }
+        while (h2 != nullptr) {
+            h.back()->sibling = h2;
+            h.push_back(h2);
+            h2 = h2->sibling;
+        }
+        BinomialHeap* binomialHeap = new BinomialHeap();
+        binomialHeap->root_list = h;
+        // тут пока что чисто первое условие биномиальной кучи выполняется
+        return binomialHeap;
     }
 
     void BinomialHeap::Decrease() {

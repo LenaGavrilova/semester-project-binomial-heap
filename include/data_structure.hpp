@@ -3,7 +3,7 @@
 // Заголовочный файл с объявлением структуры данных
 
 #include <optional>
-#include <vector>
+#include <list>
 
 namespace itis {
 
@@ -19,24 +19,21 @@ namespace itis {
       Node* sibling{nullptr};
 
       Node() = default;
-      Node(int key, int value, int degree, Node* parent, Node* child, Node* sibling) :
-      key{key}, value{value}, degree{degree}, parent{parent}, child{child}, sibling{sibling} {}
+      Node(int key, int value) : key{key}, value{value} {}
   };
 
   struct BinomialHeap {
   protected:
       int size_{0};
       int capacity_{0};
-      Node* root{nullptr};
+      std::list<Node*> root_list;
 
   public:
 
       /**
-       * создание биномиальной кучи размера n
-       *
-       * @param n
+       * Создание новой пустой кучи
        */
-      explicit BinomialHeap(int n);
+      explicit BinomialHeap() = default;
 
       ~BinomialHeap();
 
@@ -56,7 +53,7 @@ namespace itis {
        * @param heap2 - куча 2
        * @return true если слились и false если разлились
        */
-      bool merge(BinomialHeap heap1, BinomialHeap heap2);
+      BinomialHeap* Merge(BinomialHeap heap1, BinomialHeap heap2);
 
       /**
        * пока не понял че за метод такой интересный
