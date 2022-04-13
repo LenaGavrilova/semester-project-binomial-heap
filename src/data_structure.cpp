@@ -1,4 +1,3 @@
-#include <stdexcept>
 #include <iostream>
 #include <algorithm>
 #include "data_structure.hpp"
@@ -8,6 +7,81 @@
 namespace itis {
 
   // здесь должны быть определения методов вашей структуры
+
+    inline Node* Root_List_Merge(Node* heap1, Node* heap2) {
+        Node *h{nullptr};
+        Node *h1 = heap1;
+        Node *h2 = heap2;
+        while (h1 != nullptr && h2 != nullptr) {
+            if (h1->degree <= h2->degree) {
+                if (h == nullptr) {
+                    h = h1;
+                } else {
+                    h->sibling = h1;
+                }
+                h1 = h1->sibling;
+            } else {
+                if (h == nullptr) {
+                    h = h2;
+                } else {
+                    h->sibling = h2;
+                }
+                h2 = h2->sibling;
+            }
+        }
+        while (h1 != nullptr) {
+            if (h == nullptr) {
+                h = h1;
+            } else {
+                h->sibling = h1;
+            }
+            h1 = h1->sibling;
+        }
+        while (h2 != nullptr) {
+            if (h == nullptr) {
+                h = h2;
+            } else {
+                h->sibling = h2;
+            }
+            h2 = h2->sibling;
+        }
+        return h;
+    }
+
+    inline void BinomialTreeLink(Node *node1, Node *node2) {
+        // node1 - child, node2 - parent
+        node1->parent = node2;
+        node1->sibling = node2->child;
+        node2->child = node1;
+        node2->degree++;
+    }
+
+    inline Node* BinomialHeapUnion(Node* heap1, Node* heap2) {
+        Node* h = Root_List_Merge(heap1, heap2);
+        Node* prev_x = nullptr;
+        Node* x = h;
+        Node* next_x = x->sibling;
+        while (next_x != nullptr) {
+            if (x->degree != next_x->degree ||
+                (next_x->sibling != nullptr and next_x->sibling->degree == x->degree)) {
+                prev_x = x;
+                x = next_x;
+            } else if (x->key <= next_x->key) {
+                x->sibling = next_x->sibling;
+                BinomialTreeLink(next_x, x);
+            } else {
+                if (prev_x == nullptr) {
+                    h = next_x;
+                } else {
+                    prev_x->sibling = next_x;
+                }
+                BinomialTreeLink(x, next_x);
+                x = next_x;
+            }
+            next_x = x->sibling;
+        }
+        return h;
+    }
 
     BinomialHeap::~BinomialHeap() = default;
 
@@ -43,6 +117,11 @@ namespace itis {
 
     int BinomialHeap::size() const {
         return size_;
+    }
+
+    void BinomialHeap::print() {
+        std::cout << root_;
+        std::cout << root_->child;
     }
 
 }  // namespace itis
