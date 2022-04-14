@@ -145,8 +145,38 @@ namespace itis {
         return minKey;
     }
 
-    std::optional<int> BinomialHeap::ExtractMin() {
-        return std::nullopt;
+    int BinomialHeap::ExtractMin() {
+        Node* x = root_;
+        Node* x_min = nullptr;
+        int x_min_key = x->key;
+        Node* previous = nullptr;
+        Node* previous_min = nullptr;
+        while (x != nullptr) {
+            if (x->key < x_min_key) {
+                x_min = x;
+                previous_min = previous;
+            }
+            previous = x;
+            x = x->sibling;
+        }
+        if (previous_min != nullptr) {
+            previous_min->sibling = x_min->sibling;
+        } else {
+            root_ = x_min->sibling;
+        }
+
+        Node* child = x_min->child;
+        previous = nullptr;
+        while (child != nullptr) {
+            Node* sibling = child->sibling;
+            child->sibling = previous;
+            previous = child;
+            child = sibling;
+        }
+
+        root_ = BinomialHeapUnion(root_, previous);
+        size_--;
+        return x_min->value;
     }
 
 
