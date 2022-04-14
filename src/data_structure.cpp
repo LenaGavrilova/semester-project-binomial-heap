@@ -20,21 +20,26 @@ namespace itis {
      */
     inline Node* Root_List_Merge(Node* node1, Node* node2) {
         Node *h{nullptr};
+        Node *newRoot{nullptr};
         Node *h1 = node1;
         Node *h2 = node2;
         while (h1 != nullptr && h2 != nullptr) {
             if (h1->degree <= h2->degree) {
                 if (h == nullptr) {
                     h = h1;
+                    newRoot = h;
                 } else {
                     h->sibling = h1;
+                    h = h1;
                 }
                 h1 = h1->sibling;
             } else {
                 if (h == nullptr) {
                     h = h2;
+                    newRoot = h;
                 } else {
                     h->sibling = h2;
+                    h = h2;
                 }
                 h2 = h2->sibling;
             }
@@ -42,20 +47,24 @@ namespace itis {
         while (h1 != nullptr) {
             if (h == nullptr) {
                 h = h1;
+                newRoot = h;
             } else {
                 h->sibling = h1;
+                h = h1;
             }
             h1 = h1->sibling;
         }
         while (h2 != nullptr) {
             if (h == nullptr) {
                 h = h2;
+                newRoot = h;
             } else {
                 h->sibling = h2;
+                h = h2;
             }
             h2 = h2->sibling;
         }
-        return h;
+        return newRoot;
     }
 
     /**
@@ -83,6 +92,7 @@ namespace itis {
      * @return - указатель на новый узел
      */
     inline Node* BinomialHeapUnion(Node* heap1, Node* heap2) {
+        //TODO: для меня, короч тут походу такая же проблема как в RootListMerge (ну сам знаешь какая) решу сегодня где то ближе к полуночи
         Node* h = Root_List_Merge(heap1, heap2);
         Node* prev_x = nullptr;
         Node* x = h;
@@ -119,7 +129,7 @@ namespace itis {
         node->parent = nullptr;
         node->child = nullptr;
         node->sibling = nullptr;
-        root_ = BinomialHeapUnion(root_, node);
+        root_ = Root_List_Merge(root_, node);
         size_++;
         return true;
     }

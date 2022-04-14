@@ -7,6 +7,6 @@ int main(int argc, char *argv[]) {
     binomialHeap->Insert(12, 200);
     binomialHeap->Insert(13, 200);
     binomialHeap->Insert(14, 200);
-    std::cout << binomialHeap->size();
+    std::cout << binomialHeap->root_->sibling->sibling->sibling->key;
     return 0;
 }
