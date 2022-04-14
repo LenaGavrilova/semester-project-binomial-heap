@@ -19,49 +19,49 @@ namespace itis {
         Node(int key, int value) : key{key}, value{value} {}
     };
 
-  struct BinomialHeap {
-  public:
-      int size_{0};
-      Node* root_{nullptr};
+    struct BinomialHeap {
+    public:
+        int size_{0};
+        Node* root_{nullptr};
 
-      /**
-       * Создание новой пустой кучи
-       */
-      explicit BinomialHeap() = default;
+        /**
+         * Создание новой пустой кучи
+         */
+        explicit BinomialHeap() = default;
 
-      /**
-       * удаление и высвобождение памяти
-       */
-      ~BinomialHeap();
+        /**
+         * удаление и высвобождение памяти
+         */
+        ~BinomialHeap();
 
-      /**
-       * вставка нового узла в биномиальную кучу
-       * работает по типу создается новый узел с данными ключами и значениями
-       * и объединяется с уже существующей кучей
-       * @param key
-       * @param value
-       * @return
-       */
-      bool Insert(int key, int value);
+        /**
+         * вставка нового узла в биномиальную кучу
+         * работает по типу создается новый узел с данными ключами и значениями
+         * и объединяется с уже существующей кучей
+         * @param key
+         * @param value
+         * @return
+         */
+        bool Insert(int key, int value);
 
-      /**
-      * поиск минимального ключа кучи
-      * @return минимальный ключ кучи (удивительно)
-      */
-      int Minimum() const;
+        /**
+        * поиск минимального ключа кучи
+        * @return минимальный ключ кучи (удивительно)
+        */
+        int Minimum() const;
 
-      std::optional<int> ExtractMin();
+        std::optional<int> ExtractMin();
 
-      /**
-       * пока не понял че за метод такой интересный
-       */
-      void Decrease();
+        /**
+         * пока не понял че за метод такой интересный
+         */
+        void Decrease();
 
-      void Delete();
+        void Delete();
 
-      // геттеры
+        // геттеры
 
-      int size() const;
-  };
+        int size() const;
+    };
 
 }  // namespace itis
