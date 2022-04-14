@@ -92,7 +92,6 @@ namespace itis {
      * @return - указатель на новый узел
      */
     inline Node* BinomialHeapUnion(Node* heap1, Node* heap2) {
-        //TODO: для меня, короч тут походу такая же проблема как в RootListMerge (ну сам знаешь какая) решу сегодня где то ближе к полуночи
         Node* h = Root_List_Merge(heap1, heap2);
         Node* prev_x = nullptr;
         Node* x = h;
@@ -129,7 +128,7 @@ namespace itis {
         node->parent = nullptr;
         node->child = nullptr;
         node->sibling = nullptr;
-        root_ = Root_List_Merge(root_, node);
+        root_ = BinomialHeapUnion(root_, node);
         size_++;
         return true;
     }
