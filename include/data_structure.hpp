@@ -17,7 +17,7 @@ namespace itis {
 
         Node() = default;
         Node(int key, int value) : key{key}, value{value} {}
-  };
+    };
 
   struct BinomialHeap {
   public:

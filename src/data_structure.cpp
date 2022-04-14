@@ -8,10 +8,20 @@ namespace itis {
 
   // здесь должны быть определения методов вашей структуры
 
-    inline Node* Root_List_Merge(Node* heap1, Node* heap2) {
+    /**
+     * Объединение узлов в сестренские отношения
+     * с учетом 1го условия биномиальной кучи и всех сестренских отношений каждого из узлов
+     *
+     * возвращает указатель на самый мелкий по ключу узел
+     * из всех объединенных
+     * @param node1 - узел 1
+     * @param node2 - узел 2
+     * @return - указатель на новый узел
+     */
+    inline Node* Root_List_Merge(Node* node1, Node* node2) {
         Node *h{nullptr};
-        Node *h1 = heap1;
-        Node *h2 = heap2;
+        Node *h1 = node1;
+        Node *h2 = node2;
         while (h1 != nullptr && h2 != nullptr) {
             if (h1->degree <= h2->degree) {
                 if (h == nullptr) {
@@ -48,6 +58,12 @@ namespace itis {
         return h;
     }
 
+    /**
+     * связывание двух узлов биномиального дерева
+     * node1 становится потомком node2
+     * @param node1 - узел 1
+     * @param node2 - узел 2
+     */
     inline void BinomialTreeLink(Node *node1, Node *node2) {
         // node1 - child, node2 - parent
         node1->parent = node2;
@@ -56,6 +72,16 @@ namespace itis {
         node2->degree++;
     }
 
+    /**
+     * Объединение узлов в сестренские отношения (с учетом таковых у самих узлов)
+     * с учетом 1го и 2го условия биномиальной кучи
+     *
+     * возвращает указатель на самый мелкий по ключу узел
+     * из всех объединенных
+     * @param node1 - узел 1
+     * @param node2 - узел 2
+     * @return - указатель на новый узел
+     */
     inline Node* BinomialHeapUnion(Node* heap1, Node* heap2) {
         Node* h = Root_List_Merge(heap1, heap2);
         Node* prev_x = nullptr;
