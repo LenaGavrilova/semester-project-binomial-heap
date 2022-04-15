@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include "data_structure.hpp"
 
 // файл с определениями
@@ -192,8 +191,11 @@ namespace itis {
         }
     }
 
-    void BinomialHeap::Delete() {
+    inline constexpr auto kIntConstant = INT32_MIN;
 
+    void BinomialHeap::Delete(Node* node) {
+        Decrease(node, kIntConstant);
+        ExtractMin();
     }
 
     int BinomialHeap::size() const {
