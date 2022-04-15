@@ -42,7 +42,7 @@ namespace itis {
          * @param value
          * @return
          */
-        bool Insert(int key, int value);
+        Node* Insert(int key, int value);
 
         /**
         * поиск минимального ключа кучи
@@ -64,17 +64,19 @@ namespace itis {
         int ExtractMin();
 
         /**
-         * пока не понял че за метод такой интересный
+         * Понижение приоритета узла
+         *
+         * уменьшаем значения ключа у узла
+         * и если ключ становится меньше чем родительский, меняем их местами
+         * и делаем так, пока возможно и пока не добрались до корня
          */
-        void Decrease();
+        void Decrease(Node* node, int key);
 
         void Delete();
 
         // геттеры
 
         int size() const;
-    private:
-        Node* minimum();
     };
 
 }  // namespace itis

@@ -6,9 +6,8 @@ int main(int argc, char *argv[]) {
     binomialHeap->Insert(10, 228);
     binomialHeap->Insert(12, 200);
     binomialHeap->Insert(13, 200);
-    binomialHeap->Insert(14, 200);
+    itis::Node* node = binomialHeap->Insert(14, 200);
     binomialHeap->Insert(15, 200);
-    binomialHeap->ExtractMin();
-    std::cout << binomialHeap->root_->child->child->key;
+    binomialHeap->Decrease(node, -10);
     return 0;
 }

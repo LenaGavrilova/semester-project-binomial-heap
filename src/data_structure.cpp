@@ -120,7 +120,7 @@ namespace itis {
 
     BinomialHeap::~BinomialHeap() = default;
 
-    bool BinomialHeap::Insert(int key, int value) {
+    Node* BinomialHeap::Insert(int key, int value) {
         Node* node = new Node();
         node->key = key;
         node->value = value;
@@ -130,7 +130,7 @@ namespace itis {
         node->sibling = nullptr;
         root_ = BinomialHeapUnion(root_, node);
         size_++;
-        return true;
+        return node;
     }
 
     int BinomialHeap::Minimum() const {
@@ -179,10 +179,17 @@ namespace itis {
         return x_min->value;
     }
 
-
-
-    void BinomialHeap::Decrease() {
-
+    void BinomialHeap::Decrease(Node* node, int newKey) {
+        node->key = newKey;
+        Node* y = node;
+        Node* z = y->parent;
+        while (z != nullptr and y->key < z->key) {
+            int temp = y->key;
+            y->key = z->key;
+            z->key = temp;
+            y = z;
+            z = y->parent;
+        }
     }
 
     void BinomialHeap::Delete() {
