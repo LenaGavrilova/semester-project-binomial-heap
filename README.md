@@ -21,9 +21,9 @@
 
 Асимптотика перечисленных выше операций такова:
  * Make – O(1)
- * Merge – O(N)
+ * Merge – O(log N)
  * Insert – O(log N) – где N – количество элементов в куче.
- * Minimum – O(1)
+ * Minimum – O(log N)
  * ExtractMin – O(log N)
  * Decrease – O(log N)
  * Delete – O(log N)
@@ -119,7 +119,7 @@ dataset/
 |----------------|:---------:|----------------:|
 | insert | добавление элемента| время |
 | extractMin| нахождение минимума | время |
-| delete | удаление элемента | время |
+| merge | слияние двух куч | время |
 
 ##### Пример запуска
 ``` ./benchmark <input> <output> --trials 50```
