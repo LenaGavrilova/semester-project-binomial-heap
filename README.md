@@ -134,3 +134,4 @@ dataset/
 2. https://neerc.ifmo.ru/wiki/index.php?title=Биномиальная_куча
 3. https://itnan.ru/post.php?c=1&p=578252
 4. https://vporoshok.me/post/2018/11/meldable-heaps/
+5. https://www.youtube.com/watch?v=PzytwZRjjS8
