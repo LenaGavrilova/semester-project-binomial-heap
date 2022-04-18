@@ -147,11 +147,12 @@ namespace itis {
     int BinomialHeap::ExtractMin() {
         Node* x = root_;
         Node* x_min = nullptr;
-        int x_min_key = x->key;
+        int x_min_key = ~0U >> 1;
         Node* previous = nullptr;
         Node* previous_min = nullptr;
         while (x != nullptr) {
             if (x->key < x_min_key) {
+                x_min_key = x->key;
                 x_min = x;
                 previous_min = previous;
             }
