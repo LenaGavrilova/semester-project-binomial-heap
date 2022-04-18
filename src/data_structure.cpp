@@ -132,16 +132,18 @@ namespace itis {
         return node;
     }
 
-    int BinomialHeap::Minimum() const {
-        int minKey = root_->key;
-        Node* node{root_->sibling};
+    Node* BinomialHeap::Minimum() const {
+        int minKey = ~0U >> 1;
+        Node* node = root_;
+        Node* min_node = nullptr;
         while (node != nullptr) {
             if (node->key < minKey) {
                 minKey = node->key;
+                min_node = node;
             }
             node = node->sibling;
         }
-        return minKey;
+        return min_node;
     }
 
     int BinomialHeap::ExtractMin() {

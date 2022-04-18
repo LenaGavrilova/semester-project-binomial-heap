@@ -4,7 +4,7 @@ import os
 
 DATASETS_SIZES = [100, 1000, 10_000, 100_000, 1_000_000]
 DATASETS_NAMES = ["01", "02", "03", "04", "05"]
-OPERATIONS_NAMES = ["Insert", "ExtractMin", "Merge"]
+OPERATIONS_NAMES = ["Insert", "ExtractMin", "Minimum"]
 
 
 def make_directories(name):
