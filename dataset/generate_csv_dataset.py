@@ -36,5 +36,5 @@ if __name__ == '__main__':
     # запись данных в файл
     with open(args.output, 'w') as file:
         for i in range(args.samples - 1):
-            file.write('{},'.format(random.randint(1,1000000000)))
+            file.write('{},'.format(random.randint(1, 1000000000)))
         file.write(str(args.samples - 1))

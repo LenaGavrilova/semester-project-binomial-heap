@@ -1,8 +1,5 @@
 #pragma once
 
-// Заголовочный файл с объявлением структуры данных
-
-#include <optional>
 #include <list>
 
 namespace itis {
@@ -14,12 +11,14 @@ namespace itis {
         int key{0};
         int value{0};
         int degree{0};
-        Node* parent{nullptr};
-        Node* child{nullptr};
-        Node* sibling{nullptr};
+        Node *parent{nullptr};
+        Node *child{nullptr};
+        Node *sibling{nullptr};
 
         Node() = default;
+
         Node(int key, int value) : key{key}, value{value} {}
+
         ~Node() {
             value = 0;
             degree = 0;
@@ -30,9 +29,11 @@ namespace itis {
     };
 
     struct BinomialHeap {
-    public:
+    private:
         int size_{0};
-        Node* root_{nullptr};
+        Node *root_{nullptr};
+
+    public:
 
         /**
          * Создание новой пустой кучи
@@ -52,13 +53,13 @@ namespace itis {
          * @param value
          * @return
          */
-        Node* Insert(int key, int value);
+        Node *Insert(int key, int value);
 
         /**
         * поиск минимального элемента кучи по ключу
         * @return минимальный элемент кучи по ключу (удивительно)
         */
-        Node* Minimum() const;
+        Node *Minimum() const;
 
         /**
          * Извлечение минимума
@@ -69,9 +70,9 @@ namespace itis {
          * дочернего узла обращаем parent в null
          * 4. устанавливаем заголовок созданной пустой кучи на первый элемент нового списка корней
          * 5. Сливаем кучи
-         * @return значение минимального по ключу узла
+         * @return минимальный по ключу узел
          */
-        int ExtractMin();
+        Node *ExtractMin();
 
         /**
          * Понижение приоритета узла
@@ -80,7 +81,7 @@ namespace itis {
          * и если ключ становится меньше чем родительский, меняем их местами
          * и делаем так, пока возможно и пока не добрались до корня
          */
-        void Decrease(Node* node, int key);
+        void Decrease(Node *node, int key);
 
         /**
          * Удаление узла
@@ -93,11 +94,11 @@ namespace itis {
          * затем производится ExtractMin соответсвенно этого узла
          * (((хитро? да, хитро)))
          */
-        void Delete(Node* node);
-
-        // геттеры
+        void Delete(Node *node);
 
         int size() const;
+
+        Node *root();
     };
 
 }  // namespace itis

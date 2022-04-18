@@ -3,11 +3,7 @@
 #include <queue>
 #include "data_structure.hpp"
 
-// файл с определениями
-
 namespace itis {
-
-  // здесь должны быть определения методов вашей структуры
 
     /**
      * Объединение узлов в сестренские отношения
@@ -19,7 +15,7 @@ namespace itis {
      * @param node2 - узел 2
      * @return - указатель на новый узел
      */
-    inline Node* Root_List_Merge(Node* node1, Node* node2) {
+    inline Node *Root_List_Merge(Node *node1, Node *node2) {
         Node *h{nullptr};
         Node *newRoot{nullptr};
         Node *h1 = node1;
@@ -76,6 +72,9 @@ namespace itis {
      */
     inline void BinomialTreeLink(Node *node1, Node *node2) {
         // node1 - child, node2 - parent
+        if (node1 == nullptr || node2 == nullptr) {
+            return;
+        }
         node1->parent = node2;
         node1->sibling = node2->child;
         node2->child = node1;
@@ -92,11 +91,11 @@ namespace itis {
      * @param node2 - узел 2
      * @return - указатель на новый узел
      */
-    inline Node* BinomialHeapUnion(Node* heap1, Node* heap2) {
-        Node* h = Root_List_Merge(heap1, heap2);
-        Node* prev_x = nullptr;
-        Node* x = h;
-        Node* next_x = x->sibling;
+    inline Node *BinomialHeapUnion(Node *heap1, Node *heap2) {
+        Node *h = Root_List_Merge(heap1, heap2);
+        Node *prev_x = nullptr;
+        Node *x = h;
+        Node *next_x = x->sibling;
         while (next_x != nullptr) {
             if (x->degree != next_x->degree ||
                 (next_x->sibling != nullptr and next_x->sibling->degree == x->degree)) {
@@ -120,18 +119,18 @@ namespace itis {
     }
 
     BinomialHeap::~BinomialHeap() {
-        Node* currPtr = root_;
-        std::vector<Node*> nodes;
+        Node *currPtr = root_;
+        std::vector<Node *> nodes;
         while (currPtr != nullptr) {
-            std::queue<Node*> queue;
+            std::queue<Node *> queue;
             queue.push(currPtr);
             while (!queue.empty()) {
-                Node* current = queue.front();
+                Node *current = queue.front();
                 nodes.push_back(queue.front());
                 queue.pop();
 
                 if (current->child != nullptr) {
-                    Node* tempPtr = current->child;
+                    Node *tempPtr = current->child;
                     while (tempPtr != nullptr) {
                         queue.push(tempPtr);
                         tempPtr = tempPtr->sibling;
@@ -140,13 +139,13 @@ namespace itis {
             }
             currPtr = currPtr->sibling;
         }
-        for (auto & node : nodes) {
+        for (auto &node: nodes) {
             delete node;
         }
     }
 
-    Node* BinomialHeap::Insert(int key, int value) {
-        Node* node = new Node();
+    Node *BinomialHeap::Insert(int key, int value) {
+        Node *node = new Node();
         node->key = key;
         node->value = value;
         node->degree = 0;
@@ -158,10 +157,13 @@ namespace itis {
         return node;
     }
 
-    Node* BinomialHeap::Minimum() const {
+    Node *BinomialHeap::Minimum() const {
+        if (root_ == nullptr) {
+            return nullptr;
+        }
         int minKey = ~0U >> 1;
-        Node* node = root_;
-        Node* min_node = nullptr;
+        Node *node = root_;
+        Node *min_node = nullptr;
         while (node != nullptr) {
             if (node->key < minKey) {
                 minKey = node->key;
@@ -172,12 +174,12 @@ namespace itis {
         return min_node;
     }
 
-    int BinomialHeap::ExtractMin() {
-        Node* x = root_;
-        Node* x_min = nullptr;
+    Node *BinomialHeap::ExtractMin() {
+        Node *x = root_;
+        Node *x_min = nullptr;
         int x_min_key = ~0U >> 1;
-        Node* previous = nullptr;
-        Node* previous_min = nullptr;
+        Node *previous = nullptr;
+        Node *previous_min = nullptr;
         while (x != nullptr) {
             if (x->key < x_min_key) {
                 x_min_key = x->key;
@@ -193,10 +195,10 @@ namespace itis {
             root_ = x_min->sibling;
         }
 
-        Node* child = x_min->child;
+        Node *child = x_min->child;
         previous = nullptr;
         while (child != nullptr) {
-            Node* sibling = child->sibling;
+            Node *sibling = child->sibling;
             child->sibling = previous;
             previous = child;
             child = sibling;
@@ -204,13 +206,13 @@ namespace itis {
 
         root_ = BinomialHeapUnion(root_, previous);
         size_--;
-        return x_min->value;
+        return x_min;
     }
 
-    void BinomialHeap::Decrease(Node* node, int newKey) {
+    void BinomialHeap::Decrease(Node *node, int newKey) {
         node->key = newKey;
-        Node* y = node;
-        Node* z = y->parent;
+        Node *y = node;
+        Node *z = y->parent;
         while (z != nullptr and y->key < z->key) {
             int temp = y->key;
             y->key = z->key;
@@ -222,13 +224,17 @@ namespace itis {
 
     inline constexpr auto kIntConstant = INT32_MIN;
 
-    void BinomialHeap::Delete(Node* node) {
+    void BinomialHeap::Delete(Node *node) {
         Decrease(node, kIntConstant);
         ExtractMin();
     }
 
     int BinomialHeap::size() const {
         return size_;
+    }
+
+    Node *BinomialHeap::root() {
+        return root_;
     }
 
 }  // namespace itis

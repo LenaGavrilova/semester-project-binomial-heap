@@ -38,7 +38,7 @@ vector<int> createVectorFromCSV(string &path) {
     return numbers;
 }
 
-void ExtractMin_benchmark(BinomialHeap* binomialHeap) {
+void ExtractMin_benchmark(BinomialHeap *binomialHeap) {
     const auto time_point_before = chrono::steady_clock::now();
 
     binomialHeap->ExtractMin();
@@ -50,7 +50,7 @@ void ExtractMin_benchmark(BinomialHeap* binomialHeap) {
     cout << "Time elapsed (ns): " << time_elapsed_ns << '\n';
 }
 
-void Insert_Benchmark(BinomialHeap* binomialHeap) {
+void Insert_Benchmark(BinomialHeap *binomialHeap) {
     const auto time_point_before = chrono::steady_clock::now();
 
     binomialHeap->Insert(kRandomInsertKey, kRandomInsertKey);
@@ -62,7 +62,7 @@ void Insert_Benchmark(BinomialHeap* binomialHeap) {
     cout << "Time elapsed (ns): " << time_elapsed_ns << '\n';
 }
 
-void Minimum_Benchmark(BinomialHeap* binomialHeap) {
+void Minimum_Benchmark(BinomialHeap *binomialHeap) {
     const auto time_point_before = chrono::steady_clock::now();
 
     binomialHeap->Minimum();
@@ -75,7 +75,7 @@ void Minimum_Benchmark(BinomialHeap* binomialHeap) {
 }
 
 // fill BinomialHeap
-BinomialHeap* fill(std::vector<int> vect) {
+BinomialHeap *fill(std::vector<int> vect) {
     auto *binomialHeap = new BinomialHeap();
     for (int key: vect) {
         binomialHeap->Insert(key, key);
@@ -87,7 +87,7 @@ int main() {
     const auto path = string(kDatasetPath);
     cout << "Path to the 'dataset/' folder: " << path << endl;
 
-    for (string method : kMethodsNamesList) {
+    for (string method: kMethodsNamesList) {
         for (string dataset_name: kDatasetNamesList) {
             for (string count: kDatasetCountsList) {
                 for (int trial = 1; trial < kTrialsCount + 1; trial++) {
@@ -96,7 +96,7 @@ int main() {
                     cout << "Method-" << method << " dataset-" << dataset_name << " datacount-" << count << " trial-";
                     cout << trial << "\t";
 
-                    BinomialHeap* binomialHeap = fill(vect);
+                    BinomialHeap *binomialHeap = fill(vect);
 
                     if (std::equal(method.begin(), method.end(), "ExtractMin")) {
                         ExtractMin_benchmark(binomialHeap);
