@@ -105,6 +105,8 @@ int main() {
                     } else if (std::equal(method.begin(), method.end(), "Minimum")) {
                         Minimum_Benchmark(binomialHeap);
                     }
+
+                    delete binomialHeap;
                 }
                 cout << endl;
             }

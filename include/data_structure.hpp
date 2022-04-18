@@ -20,6 +20,13 @@ namespace itis {
 
         Node() = default;
         Node(int key, int value) : key{key}, value{value} {}
+        ~Node() {
+            value = 0;
+            degree = 0;
+            parent = nullptr;
+            child = nullptr;
+            sibling = nullptr;
+        }
     };
 
     struct BinomialHeap {

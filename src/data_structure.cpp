@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <queue>
 #include "data_structure.hpp"
 
 // файл с определениями
@@ -117,7 +119,31 @@ namespace itis {
         return h;
     }
 
-    BinomialHeap::~BinomialHeap() = default;
+    BinomialHeap::~BinomialHeap() {
+        Node* currPtr = root_;
+        std::vector<Node*> nodes;
+        while (currPtr != nullptr) {
+            std::queue<Node*> queue;
+            queue.push(currPtr);
+            while (!queue.empty()) {
+                Node* current = queue.front();
+                nodes.push_back(queue.front());
+                queue.pop();
+
+                if (current->child != nullptr) {
+                    Node* tempPtr = current->child;
+                    while (tempPtr != nullptr) {
+                        queue.push(tempPtr);
+                        tempPtr = tempPtr->sibling;
+                    }
+                }
+            }
+            currPtr = currPtr->sibling;
+        }
+        for (auto & node : nodes) {
+            delete node;
+        }
+    }
 
     Node* BinomialHeap::Insert(int key, int value) {
         Node* node = new Node();
