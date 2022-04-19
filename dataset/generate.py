@@ -20,8 +20,9 @@ if __name__ == "__main__":
     for i in OPERATIONS_NAMES:
         make_directories(i)
 
-    for dataset_name in DATASETS_NAMES:
-        for dataset_size in DATASETS_SIZES:
-            subprocess.Popen([sys.executable, "generate_csv_dataset.py",
-                              "data/{}/{}/{}.csv".format("ExtractMin", dataset_name, dataset_size),
-                              "--samples", "{}".format(dataset_size)])
+    for method in OPERATIONS_NAMES:
+        for dataset_name in DATASETS_NAMES:
+            for dataset_size in DATASETS_SIZES:
+                subprocess.Popen([sys.executable, "generate_csv_dataset.py",
+                                  "data/{}/{}/{}.csv".format(method, dataset_name, dataset_size),
+                                  "--samples", "{}".format(dataset_size)])
