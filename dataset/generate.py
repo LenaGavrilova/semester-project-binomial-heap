@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-DATASETS_SIZES = [100, 1000, 10_000, 100_000, 1_000_000]
+DATASETS_SIZES = [100, 500, 1000, 5000, 10_000, 50_000, 100_000, 500_000, 1_000_000]
 DATASETS_NAMES = ["01", "02", "03", "04", "05"]
 OPERATIONS_NAMES = ["Insert", "ExtractMin", "Minimum"]
 

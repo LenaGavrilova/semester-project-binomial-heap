@@ -19,7 +19,7 @@ static constexpr auto kTrialsCount = 10;
 static constexpr auto kRandomInsertKey = 1000000;
 static constexpr auto kMethodsNamesList = {"Insert", "Minimum", "ExtractMin"};
 static constexpr auto kDatasetNamesList = {"01", "02", "03", "04", "05"};
-static constexpr auto kDatasetCountsList = {"100", "1000", "10000", "100000", "1000000"};
+static constexpr auto kDatasetCountsList = {"100", "500", "1000", "5000", "10000", "50000", "100000", "500000", "1000000"};
 
 vector<int> createVectorFromCSV(string &path) {
     fstream fin;
