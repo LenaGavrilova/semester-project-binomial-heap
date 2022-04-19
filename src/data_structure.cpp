@@ -142,6 +142,8 @@ namespace itis {
         for (auto &node: nodes) {
             delete node;
         }
+        root_ = nullptr;
+        size_ = 0;
     }
 
     Node *BinomialHeap::Insert(int key, int value) {
